@@ -1,12 +1,12 @@
-# Claude CLI Wrapper
+# opencode CLI Wrapper
 
-Shell wrapper for the `claude` command that adds project shortcuts and a configurable default directory.
+Shell wrapper for the `opencode` command that adds project shortcuts and a configurable default directory.
 
 ## Setup
 
 1. Add to your `~/.bashrc` or `~/.zshrc`:
    ```sh
-   source /path/to/claude-cli-wrapper/claude_wrapper.sh
+   source /path/to/opencode-cli-wrapper/opencode_wrapper.sh
    ```
 
 2. Reload your shell:
@@ -18,11 +18,11 @@ Shell wrapper for the `claude` command that adds project shortcuts and a configu
 
 ## Projects file
 
-Located alongside `claude_wrapper.sh`. Created automatically on first run with `default` set to the current directory.
+Located alongside `opencode_wrapper.sh`. Created automatically on first run with `default` set to `$HOME`.
 
 ```
-# Special entry: default=/path — used when claude is run with no arguments.
-default=/your/default/path
+# Special entry: default=/path — used when opencode is run with no arguments.
+default=~
 
 # Project shortcuts
 my-project=/path/to/my-project
@@ -30,7 +30,7 @@ my-project=/path/to/my-project
 
 ## Usage
 
-- `claude` — start Claude in the `default` directory
-- `claude <project>` — start Claude in the named project's directory
-- `claude list` — list all configured project shortcuts
-- `claude <project> [args...]` — pass extra args to Claude
+- `opencode` — start opencode in the `default` directory
+- `opencode <project>` — start opencode in the named project's directory
+- `opencode list` — list all configured project shortcuts
+- `opencode <project> [args...]` — pass extra args to opencode

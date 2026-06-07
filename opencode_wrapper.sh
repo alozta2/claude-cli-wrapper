@@ -1,12 +1,12 @@
-# Claude CLI wrapper: project shortcuts and default directory fallback
-# Usage: claude                      -> starts claude in the directory set as default in projects
-#        claude <project>            -> starts claude in that project's dir
-#        claude list                 -> lists available project shortcuts
-#        claude <project> [args...]  -> passes extra args to claude
+# opencode CLI wrapper: project shortcuts and default directory fallback
+# Usage: opencode                      -> starts opencode in the directory set as default in projects
+#        opencode <project>            -> starts opencode in that project's dir
+#        opencode list                 -> lists available project shortcuts
+#        opencode <project> [args...]  -> passes extra args to opencode
 #
 # Projects are loaded from projects (same directory as this script).
-# If projects does not exist, it is created with default pointing to the current directory.
-claude() {
+# If projects does not exist, it is created with default pointing to "$HOME".
+opencode() {
   # Locate projects file alongside this script
   local script_dir
   script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -15,16 +15,16 @@ claude() {
   # Create projects if it doesn't exist
   if [[ ! -f "$props_file" ]]; then
     cat > "$props_file" <<EOF
-# Claude project shortcuts
+# opencode project shortcuts
 # Format: project-name=/path/to/project
-# Add or remove entries here — the claude wrapper script reads this file.
+# Add or remove entries here — the opencode wrapper script reads this file.
 # Lines starting with # are comments and are ignored.
 #
-# Special entry: default=/path — used when claude is run with no arguments.
+# Special entry: default=/path — used when opencode is run with no arguments.
 
-default=$PWD
+default=$HOME
 EOF
-    echo "Created $props_file with default pointing to: $PWD"
+    echo "Created $props_file with default pointing to: $HOME"
   fi
 
   # Load projects from file into associative array
@@ -42,25 +42,25 @@ EOF
       echo "  $name -> ${projects[$name]}"
     done
     echo ""
-    echo "Usage: claude [project] [args...]"
+    echo "Usage: opencode [project] [args...]"
     return
   fi
 
-  # If a known project name is given, cd into it and run claude
+  # If a known project name is given, cd into it and run opencode
   if [[ -n "$1" && -n "${projects[$1]}" ]]; then
     local dir="${projects[$1]}"
-    echo "Project shortcut from claude_wrapper.sh: starting claude in $dir"
+    echo "Project shortcut from opencode_wrapper.sh: starting opencode in $dir"
     shift
-    (cd "$dir" && command claude "$@")
+    (cd "$dir" && command opencode "$@")
     return
   fi
 
-  # No project name given: run claude in the default directory
+  # No project name given: run opencode in the default directory
   local default_dir="${projects[default]}"
   if [[ -z "$default_dir" ]]; then
     echo "No default directory set. Add 'default=/your/path' to $props_file"
     return 1
   fi
-  echo "Default from claude_wrapper.sh: starting claude in $default_dir"
-  (cd "$default_dir" && command claude "$@")
+  echo "Default from opencode_wrapper.sh: starting opencode in $default_dir"
+  (cd "$default_dir" && command opencode "$@")
 }

@@ -1,8 +1,8 @@
-# Claude project shortcuts
+# opencode project shortcuts
 # Format: project-name=/path/to/project
-# Add or remove entries here — the claude wrapper script reads this file.
+# Add or remove entries here — the opencode wrapper script reads this file.
 # Lines starting with # are comments and are ignored.
 #
-# Special entry: default=/path — used when claude is run with no arguments.
+# Special entry: default=/path — used when opencode is run with no arguments.
 
 default=/directory/to/default/project/cwd-by-default
