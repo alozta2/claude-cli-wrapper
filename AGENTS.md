@@ -6,14 +6,6 @@ A tiny shell wrapper for the `opencode` command. It defines a bash function
 configurable default working directory. It is meant to be sourced from
 `~/.bashrc` / `~/.zshrc`.
 
-This is the **heart of opencode CLI executions**. All projects are meant to be
-linked from here via the `projects` file. That way the user only has to remember
-one path — this directory — to navigate and launch opencode across all projects.
-
-## Environment
-- Runs inside a **WSL VM**. All paths in config must be WSL/Linux paths
-  (e.g. `/mnt/d/...`, `/home/user/...`). **Never use Windows paths** (`D:\...`).
-
 ## Files
 - `opencode_wrapper.sh` — the wrapper logic (single `opencode()` function).
 - `projects` — user config, `name=/path` pairs. Git-ignored (see `.gitignore`).
